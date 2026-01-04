@@ -120,10 +120,32 @@ LC-MS 데이터에서 크로마토그래픽 피크(feature)를 자동 검출합�
 - 필수 컬럼: `name`, `formula` 또는 `exact_mass`
 - 선택 컬럼: `cas_number`, `smiles`
 
+#### 📋 내장 NIST PFAS Suspect List (신규 기능)
+
+**"Use Built-in NIST PFAS List (86 compounds)"** 버튼을 클릭하면 NIST DIMSpec 기반의 86개 PFAS 화합물 리스트가 자동으로 로드됩니다.
+
+| 화합물 분류 | 포함 화합물 예시 | 개수 |
+|------------|----------------|-----|
+| **PFCAs** (과불화카르복실산) | PFBA, PFPeA, PFHxA, PFHpA, PFOA, PFNA, PFDA, PFUnDA, PFDoDA | 14개 |
+| **PFSAs** (과불화술폰산) | PFBS, PFPeS, PFHxS, PFHpS, PFOS, PFNS, PFDS | 12개 |
+| **Fluorotelomers** | 4:2/6:2/8:2/10:2 FTOH, FTS, FTCA, FTUCA | 20개 |
+| **Ether Carboxylic Acids** | HFPO-DA (GenX), ADONA, PMPA, PEPA | 12개 |
+| **Sulfonamides** | FOSA, NMeFOSA, NEtFOSA, FOSAA, NMeFOSAA | 15개 |
+| **기타** | F-53B, PFECHS, diPAPs, monoPAPs 등 | 13개 |
+
+**사용 방법:**
+1. Prioritization 탭에서 "📋 Use Built-in NIST PFAS List" 버튼 클릭
+2. Suspect List 경로가 자동으로 입력됨
+3. Suspect Screening 체크박스가 자동 활성화됨
+4. Run Prioritization 클릭
+
+> 💡 **팁**: 외부 suspect list 없이도 내장 리스트만으로 바로 분석 가능합니다!
+
 ### 4.2 실행 방법
 1. Feature Finding 완료 후 자동으로 feature 데이터 로드됨
 2. Configuration 체크박스로 분석 옵션 선택
-3. **Run Prioritization** 버튼 클릭
+3. (선택) **Use Built-in NIST PFAS List** 버튼으로 내장 리스트 로드
+4. **Run Prioritization** 버튼 클릭
 
 ### 4.3 결과 테이블 컬럼
 
