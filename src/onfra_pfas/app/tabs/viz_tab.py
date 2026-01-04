@@ -111,9 +111,11 @@ class VizTab(QWidget):
         self.feature_table.itemSelectionChanged.connect(self._on_table_selection)
         self.feature_table.setStyleSheet("""
             QTableWidget {
-                background-color: #2d2d2d;
-                color: #d4d4d4;
-                gridline-color: #404040;
+                background-color: #ffffff;
+                color: #1a1a2e;
+                gridline-color: #d0d5dd;
+                border: 1px solid #d0d5dd;
+                border-radius: 6px;
             }
         """)
         list_layout.addWidget(self.feature_table)
@@ -146,10 +148,12 @@ class VizTab(QWidget):
         self.details_text.setMaximumHeight(150)
         self.details_text.setStyleSheet("""
             QTextEdit {
-                background-color: #1e1e1e;
-                color: #d4d4d4;
+                background-color: #ffffff;
+                color: #1a1a2e;
                 font-family: Consolas, monospace;
-                font-size: 11px;
+                font-size: 12px;
+                border: 1px solid #d0d5dd;
+                border-radius: 6px;
             }
         """)
         details_layout.addWidget(self.details_text)
@@ -190,9 +194,9 @@ class VizTab(QWidget):
         <head>
             <style>
                 body {
-                    background-color: #1e1e1e;
-                    color: #808080;
-                    font-family: Arial, sans-serif;
+                    background-color: #ffffff;
+                    color: #5f6368;
+                    font-family: 'Segoe UI', Arial, sans-serif;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -202,6 +206,7 @@ class VizTab(QWidget):
                 .placeholder {
                     text-align: center;
                 }
+                h2 { color: #1a1a2e; }
             </style>
         </head>
         <body>
@@ -473,20 +478,20 @@ class VizTab(QWidget):
         import json
 
         layout = {
-            "title": {"text": title, "font": {"color": "#ffffff"}},
-            "paper_bgcolor": "#1e1e1e",
-            "plot_bgcolor": "#2d2d2d",
+            "title": {"text": title, "font": {"color": "#1a1a2e", "size": 16}},
+            "paper_bgcolor": "#ffffff",
+            "plot_bgcolor": "#f8f9fa",
             "xaxis": {
                 "title": xaxis_title,
-                "color": "#d4d4d4",
-                "gridcolor": "#404040",
+                "color": "#1a1a2e",
+                "gridcolor": "#e8eaed",
             },
             "yaxis": {
                 "title": yaxis_title,
-                "color": "#d4d4d4",
-                "gridcolor": "#404040",
+                "color": "#1a1a2e",
+                "gridcolor": "#e8eaed",
             },
-            "font": {"color": "#d4d4d4"},
+            "font": {"color": "#1a1a2e"},
         }
 
         html = f"""
@@ -495,7 +500,7 @@ class VizTab(QWidget):
         <head>
             <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         </head>
-        <body style="margin:0; background:#1e1e1e;">
+        <body style="margin:0; background:#ffffff;">
             <div id="plot" style="width:100%; height:100vh;"></div>
             <script>
                 var data = {json.dumps(data)};

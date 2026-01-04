@@ -27,6 +27,7 @@ from .splash import SplashScreen
 from .tabs.feature_tab import FeatureTab
 from .tabs.prioritize_tab import PrioritizeTab
 from .tabs.viz_tab import VizTab
+from .tabs.ml_tab import MLTab
 
 from ..core.config import PipelineConfig, get_default_config
 from ..core.utils import resource_path
@@ -58,103 +59,145 @@ class MainWindow(QMainWindow):
         if icon_path.exists():
             self.setWindowIcon(QIcon(str(icon_path)))
 
-        # Dark theme stylesheet
+        # Brighter modern theme stylesheet
         self.setStyleSheet("""
             QMainWindow {
-                background-color: #1a1a2e;
+                background-color: #f0f2f5;
             }
             QWidget {
-                background-color: #1a1a2e;
-                color: #d4d4d4;
+                background-color: #f0f2f5;
+                color: #1a1a2e;
+                font-size: 13px;
             }
             QTabWidget::pane {
-                border: 1px solid #404040;
-                background-color: #16213e;
-                border-radius: 5px;
+                border: 1px solid #d0d5dd;
+                background-color: #ffffff;
+                border-radius: 8px;
             }
             QTabBar::tab {
-                background-color: #2d2d44;
-                color: #a0a0a0;
-                padding: 10px 20px;
+                background-color: #e8eaed;
+                color: #5f6368;
+                padding: 12px 24px;
                 margin-right: 2px;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
+                border-top-left-radius: 8px;
+                border-top-right-radius: 8px;
+                font-weight: 500;
             }
             QTabBar::tab:selected {
-                background-color: #16213e;
-                color: #ffffff;
-                border-bottom: 2px solid #e94560;
+                background-color: #ffffff;
+                color: #1a1a2e;
+                border-bottom: 3px solid #e94560;
+                font-weight: bold;
             }
             QTabBar::tab:hover {
-                background-color: #3d3d5c;
+                background-color: #d8dade;
             }
             QGroupBox {
-                border: 1px solid #404040;
-                border-radius: 5px;
-                margin-top: 10px;
-                padding-top: 10px;
+                border: 1px solid #d0d5dd;
+                border-radius: 8px;
+                margin-top: 12px;
+                padding-top: 12px;
+                background-color: #ffffff;
                 font-weight: bold;
             }
             QGroupBox::title {
                 subcontrol-origin: margin;
-                left: 10px;
-                padding: 0 5px;
+                left: 12px;
+                padding: 0 8px;
                 color: #e94560;
+                font-size: 14px;
+            }
+            QLabel {
+                color: #1a1a2e;
             }
             QLineEdit, QSpinBox, QDoubleSpinBox, QComboBox {
-                background-color: #2d2d44;
-                border: 1px solid #404040;
-                border-radius: 3px;
-                padding: 5px;
-                color: #d4d4d4;
+                background-color: #ffffff;
+                border: 1px solid #d0d5dd;
+                border-radius: 6px;
+                padding: 8px 12px;
+                color: #1a1a2e;
+                font-size: 13px;
             }
             QLineEdit:focus, QSpinBox:focus, QDoubleSpinBox:focus, QComboBox:focus {
-                border-color: #e94560;
+                border: 2px solid #e94560;
+            }
+            QComboBox::drop-down {
+                border: none;
+                padding-right: 8px;
+            }
+            QComboBox QAbstractItemView {
+                background-color: #ffffff;
+                color: #1a1a2e;
+                selection-background-color: #e94560;
+                selection-color: #ffffff;
             }
             QPushButton {
-                background-color: #2d2d44;
-                border: 1px solid #404040;
-                border-radius: 5px;
-                padding: 8px 15px;
-                color: #d4d4d4;
+                background-color: #ffffff;
+                border: 1px solid #d0d5dd;
+                border-radius: 6px;
+                padding: 10px 18px;
+                color: #1a1a2e;
+                font-weight: 500;
             }
             QPushButton:hover {
-                background-color: #3d3d5c;
+                background-color: #f8f9fa;
                 border-color: #e94560;
+                color: #e94560;
             }
             QPushButton:pressed {
-                background-color: #4d4d6c;
+                background-color: #e8eaed;
             }
             QProgressBar {
-                background-color: #2d2d44;
+                background-color: #e8eaed;
                 border: none;
-                border-radius: 3px;
+                border-radius: 6px;
                 text-align: center;
+                color: #1a1a2e;
+                font-weight: bold;
             }
             QProgressBar::chunk {
                 background: qlineargradient(
                     x1: 0, y1: 0, x2: 1, y2: 0,
                     stop: 0 #e94560,
-                    stop: 1 #ff6b6b
+                    stop: 1 #ff6b8a
                 );
-                border-radius: 3px;
+                border-radius: 6px;
             }
             QScrollBar:vertical {
-                background-color: #2d2d44;
+                background-color: #f0f2f5;
                 width: 12px;
                 border-radius: 6px;
             }
             QScrollBar::handle:vertical {
-                background-color: #4d4d6c;
+                background-color: #c4c7cc;
                 border-radius: 6px;
                 min-height: 20px;
+            }
+            QScrollBar::handle:vertical:hover {
+                background-color: #a8acb3;
             }
             QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
                 height: 0;
             }
             QStatusBar {
-                background-color: #0f3460;
-                color: #a0a0a0;
+                background-color: #ffffff;
+                color: #5f6368;
+                border-top: 1px solid #d0d5dd;
+            }
+            QCheckBox {
+                color: #1a1a2e;
+                spacing: 8px;
+            }
+            QCheckBox::indicator {
+                width: 18px;
+                height: 18px;
+                border-radius: 4px;
+                border: 2px solid #d0d5dd;
+                background-color: #ffffff;
+            }
+            QCheckBox::indicator:checked {
+                background-color: #e94560;
+                border-color: #e94560;
             }
         """)
 
@@ -174,10 +217,12 @@ class MainWindow(QMainWindow):
         self.feature_tab = FeatureTab(self.config)
         self.prioritize_tab = PrioritizeTab(self.config)
         self.viz_tab = VizTab(self.config)
+        self.ml_tab = MLTab(self.config)
 
         self.tabs.addTab(self.feature_tab, "🔬 Feature Finding")
         self.tabs.addTab(self.prioritize_tab, "🎯 Prioritization")
         self.tabs.addTab(self.viz_tab, "📊 Visualization")
+        self.tabs.addTab(self.ml_tab, "🤖 ML Analysis")
 
         layout.addWidget(self.tabs)
 
@@ -202,8 +247,9 @@ class MainWindow(QMainWindow):
         # When features are found, pass to prioritization tab
         self.feature_tab.features_found.connect(self._on_features_found)
 
-        # When prioritization completes, pass to viz tab
+        # When prioritization completes, pass to viz tab and ml tab
         self.prioritize_tab.prioritization_complete.connect(self._on_prioritization_complete)
+        self.prioritize_tab.prioritization_complete.connect(self._on_prioritization_for_ml)
 
     def _on_features_found(self, result):
         """Handle features found from feature finding."""
@@ -226,6 +272,13 @@ class MainWindow(QMainWindow):
 
             # Switch to visualization tab
             self.tabs.setCurrentIndex(2)
+
+    def _on_prioritization_for_ml(self, result_df):
+        """Handle prioritization completion for ML tab."""
+        import pandas as pd
+
+        if isinstance(result_df, pd.DataFrame):
+            self.ml_tab.set_features(result_df)
 
     def closeEvent(self, event):
         """Handle window close."""

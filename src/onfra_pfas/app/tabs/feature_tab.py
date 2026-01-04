@@ -188,10 +188,12 @@ class FeatureTab(QWidget):
         self.log_text.setReadOnly(True)
         self.log_text.setStyleSheet("""
             QTextEdit {
-                background-color: #1e1e1e;
-                color: #d4d4d4;
+                background-color: #ffffff;
+                color: #1a1a2e;
                 font-family: Consolas, monospace;
-                font-size: 11px;
+                font-size: 12px;
+                border: 1px solid #d0d5dd;
+                border-radius: 6px;
             }
         """)
         log_layout.addWidget(self.log_text)

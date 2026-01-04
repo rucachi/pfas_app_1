@@ -166,10 +166,12 @@ class PrioritizeTab(QWidget):
         self.log_text.setMaximumHeight(100)
         self.log_text.setStyleSheet("""
             QTextEdit {
-                background-color: #1e1e1e;
-                color: #d4d4d4;
+                background-color: #ffffff;
+                color: #1a1a2e;
                 font-family: Consolas, monospace;
-                font-size: 11px;
+                font-size: 12px;
+                border: 1px solid #d0d5dd;
+                border-radius: 6px;
             }
         """)
         log_layout.addWidget(self.log_text)
@@ -186,16 +188,19 @@ class PrioritizeTab(QWidget):
         self.results_table.setAlternatingRowColors(True)
         self.results_table.setStyleSheet("""
             QTableWidget {
-                background-color: #2d2d2d;
-                alternate-background-color: #353535;
-                color: #d4d4d4;
-                gridline-color: #404040;
+                background-color: #ffffff;
+                alternate-background-color: #f8f9fa;
+                color: #1a1a2e;
+                gridline-color: #d0d5dd;
+                border: 1px solid #d0d5dd;
+                border-radius: 6px;
             }
             QHeaderView::section {
-                background-color: #404040;
-                color: #ffffff;
-                padding: 5px;
+                background-color: #e8eaed;
+                color: #1a1a2e;
+                padding: 8px;
                 border: none;
+                font-weight: bold;
             }
         """)
         self.results_table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
@@ -241,6 +246,28 @@ class PrioritizeTab(QWidget):
         self.report_button.setEnabled(False)
         self.report_button.clicked.connect(self._on_generate_report)
         button_layout.addWidget(self.report_button)
+
+        # Build Dataset button (NEW)
+        self.dataset_button = QPushButton("📦 Build Dataset")
+        self.dataset_button.setEnabled(False)
+        self.dataset_button.setToolTip("ML 학습용 데이터셋 생성")
+        self.dataset_button.setStyleSheet("""
+            QPushButton {
+                background-color: #5a27a0;
+                color: white;
+                border: none;
+                padding: 10px 15px;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #7a47c0;
+            }
+            QPushButton:disabled {
+                background-color: #555555;
+            }
+        """)
+        self.dataset_button.clicked.connect(self._on_build_dataset)
+        button_layout.addWidget(self.dataset_button)
 
         button_layout.addStretch()
 
@@ -344,7 +371,50 @@ class PrioritizeTab(QWidget):
         self.min_score_spin.setValue(self.config.prioritization.scoring.min_score_threshold)
         layout.addRow("Min Score:", self.min_score_spin)
 
+        # --- ML Scoring Section ---
+        ml_separator = QLabel("── ML Scoring ──")
+        ml_separator.setStyleSheet("color: #e94560; font-weight: bold;")
+        layout.addRow(ml_separator)
+
+        self.ml_enable = QCheckBox("Enable ML Scoring")
+        self.ml_enable.setChecked(False)
+        self.ml_enable.setToolTip("AI 기반 PFAS 확률 점수 (ml_score)")
+        layout.addRow(self.ml_enable)
+
+        self.ml_uncertainty_enable = QCheckBox("Show Uncertainty")
+        self.ml_uncertainty_enable.setChecked(True)
+        self.ml_uncertainty_enable.setToolTip("MC Dropout 기반 불확실성 표시")
+        layout.addRow(self.ml_uncertainty_enable)
+
+        self.top_k_spin = QSpinBox()
+        self.top_k_spin.setRange(1, 20)
+        self.top_k_spin.setValue(5)
+        self.top_k_spin.setToolTip("유사 스펙트럼 상위 K개 표시")
+        layout.addRow("Top-K Similar:", self.top_k_spin)
+
+        # --- Quantification Section ---
+        quant_separator = QLabel("── Quantification ──")
+        quant_separator.setStyleSheet("color: #e94560; font-weight: bold;")
+        layout.addRow(quant_separator)
+
+        self.quant_mode_combo = QComboBox()
+        self.quant_mode_combo.addItems(["None", "Quantitative", "Semi-quantitative"])
+        self.quant_mode_combo.setToolTip("농도 추정 모드 선택")
+        layout.addRow("Quant Mode:", self.quant_mode_combo)
+
+        self.calibration_input = QLineEdit()
+        self.calibration_input.setPlaceholderText("Calibration CSV (정량 모드용)...")
+        self.calibration_input.setEnabled(False)
+        layout.addRow("Calibration:", self.calibration_input)
+
+        # Connect quant mode to enable/disable calibration input
+        self.quant_mode_combo.currentTextChanged.connect(self._on_quant_mode_changed)
+
         return group
+
+    def _on_quant_mode_changed(self, text: str):
+        """Handle quant mode change."""
+        self.calibration_input.setEnabled(text == "Quantitative")
 
     def _browse_suspect_list(self):
         """Browse for suspect list file."""
@@ -461,6 +531,7 @@ class PrioritizeTab(QWidget):
             self._update_results_table(result)
             self.export_button.setEnabled(True)
             self.report_button.setEnabled(True)
+            self.dataset_button.setEnabled(True)
 
             self.prioritization_complete.emit(result)
 
@@ -470,10 +541,12 @@ class PrioritizeTab(QWidget):
             self.results_table.setRowCount(0)
             return
 
-        # Select columns to display
+        # Select columns to display (expanded for Week 3)
         display_cols = [
             "feature_id", "mz", "rt", "intensity",
-            "pfas_score", "evidence_count", "evidence_types",
+            "pfas_score", "ml_score", "confidence_level",
+            "evidence_count", "evidence_types",
+            "quant_value", "quant_fold_error",
         ]
         display_cols = [c for c in display_cols if c in df.columns]
 
@@ -485,7 +558,16 @@ class PrioritizeTab(QWidget):
             for j, col in enumerate(display_cols):
                 value = row[col]
                 if isinstance(value, float):
-                    text = f"{value:.4f}" if col in ["mz", "rt"] else f"{value:.2f}"
+                    if col in ["mz", "rt"]:
+                        text = f"{value:.4f}"
+                    elif col == "ml_score":
+                        text = f"{value:.3f}"
+                    elif col == "quant_value":
+                        text = f"{value:.1f}" if value else "-"
+                    else:
+                        text = f"{value:.2f}"
+                elif value is None:
+                    text = "-"
                 else:
                     text = str(value)
 
@@ -494,6 +576,10 @@ class PrioritizeTab(QWidget):
 
                 # Highlight high scores
                 if col == "pfas_score" and isinstance(value, (int, float)) and value >= 5:
+                    item.setBackground(Qt.darkGreen)
+                elif col == "ml_score" and isinstance(value, (int, float)) and value >= 0.7:
+                    item.setBackground(Qt.darkGreen)
+                elif col == "confidence_level" and isinstance(value, (int, float)) and value <= 2:
                     item.setBackground(Qt.darkGreen)
 
                 self.results_table.setItem(i, j, item)
@@ -543,3 +629,21 @@ class PrioritizeTab(QWidget):
         self.log_text.append(message)
         scrollbar = self.log_text.verticalScrollBar()
         scrollbar.setValue(scrollbar.maximum())
+
+    def _on_build_dataset(self):
+        """Build ML training dataset from results."""
+        if self._result_df is None:
+            QMessageBox.warning(
+                self,
+                "No Results",
+                "먼저 Prioritization을 실행하세요.",
+            )
+            return
+        
+        QMessageBox.information(
+            self,
+            "Dataset Builder",
+            "ML 탭 (🤖 ML Analysis)으로 이동하여 Dataset Builder를 사용하세요.\n\n"
+            "Prioritization 결과가 자동으로 전달됩니다.",
+        )
+
