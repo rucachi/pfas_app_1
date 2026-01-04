@@ -284,6 +284,28 @@ class PrioritizeTab(QWidget):
 
         layout.addLayout(suspect_layout)
 
+        # Built-in NIST suspect list button
+        nist_layout = QHBoxLayout()
+        self.use_nist_btn = QPushButton("📋 Use Built-in NIST PFAS List (86 compounds)")
+        self.use_nist_btn.setStyleSheet("""
+            QPushButton {
+                background-color: #2d5a27;
+                color: white;
+                border: none;
+                padding: 8px 15px;
+                font-size: 12px;
+                border-radius: 4px;
+            }
+            QPushButton:hover {
+                background-color: #3d7a37;
+            }
+        """)
+        self.use_nist_btn.clicked.connect(self._use_builtin_suspect_list)
+        nist_layout.addWidget(self.use_nist_btn)
+        nist_layout.addStretch()
+        
+        layout.addLayout(nist_layout)
+
         return group
 
     def _create_config_group(self) -> QGroupBox:
@@ -334,6 +356,26 @@ class PrioritizeTab(QWidget):
         )
         if file_path:
             self.suspect_input.setText(file_path)
+
+    def _use_builtin_suspect_list(self):
+        """Use the built-in NIST PFAS suspect list."""
+        from ...core.utils import resource_path
+        
+        # Get the path to the built-in suspect list
+        suspect_path = resource_path("assets/nist_pfas_suspect_list.csv")
+        
+        if suspect_path.exists():
+            self.suspect_input.setText(str(suspect_path))
+            self.suspect_enable.setChecked(True)
+            self._log("✅ Loaded built-in NIST PFAS Suspect List (86 compounds)")
+            self._log(f"   Path: {suspect_path}")
+        else:
+            QMessageBox.warning(
+                self,
+                "Error",
+                f"Built-in suspect list not found at:\n{suspect_path}\n\n"
+                "Please check the installation.",
+            )
 
     def _load_checkpoint(self):
         """Load features from checkpoint."""

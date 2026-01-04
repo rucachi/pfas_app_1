@@ -1,0 +1,86 @@
+name,formula,exact_mass,cas_number,category,source
+PFOA,C8HF15O2,413.97358,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFOS,C8HF17O3S,499.93746,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFNA,C9HF17O2,463.97040,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFHxS,C6HF13O3S,399.94370,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFBA,C4HF7O2,213.98606,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFPeA,C5HF9O2,263.98294,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFHxA,C6HF11O2,313.97982,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFHpA,C7HF13O2,363.97670,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFDA,C10HF19O2,513.96728,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFUnDA,C11HF21O2,563.96416,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFDoDA,C12HF23O2,613.96104,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFTrDA,C13HF25O2,663.95792,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFTeDA,C14HF27O2,713.95480,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFBS,C4HF9O3S,299.95058,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFPeS,C5HF11O3S,349.94746,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFHpS,C7HF15O3S,449.94058,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFNS,C9HF19O3S,549.93434,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFDS,C10HF21O3S,599.93122,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+FOSA,C8H2F17NO2S,498.95362,,Perfluoroalkane sulfonamides,NIST DIMSpec
+NMeFOSA,C9H4F17NO2S,512.96927,,N-alkyl perfluoroalkane sulfonamides,NIST DIMSpec
+NEtFOSA,C10H6F17NO2S,526.98492,,N-alkyl perfluoroalkane sulfonamides,NIST DIMSpec
+FOSAA,C10H4F17NO4S,556.95846,,Perfluoroalkane sulfonamidoacetic acids,NIST DIMSpec
+NMeFOSAA,C11H6F17NO4S,570.97411,,N-alkyl perfluoroalkane sulfonamidoacetic acids,NIST DIMSpec
+NEtFOSAA,C12H8F17NO4S,584.98976,,N-alkyl perfluoroalkane sulfonamidoacetic acids,NIST DIMSpec
+8:2 FTOH,C10H5F17O,464.01161,,Fluorotelomer alcohols (FTOHs),NIST DIMSpec
+6:2 FTOH,C8H5F13O,364.01785,,Fluorotelomer alcohols (FTOHs),NIST DIMSpec
+4:2 FTOH,C6H5F9O,264.02409,,Fluorotelomer alcohols (FTOHs),NIST DIMSpec
+10:2 FTOH,C12H5F21O,564.00537,,Fluorotelomer alcohols (FTOHs),NIST DIMSpec
+6:2 FTCA,C8H3F13O2,377.99588,,Fluorotelomer carboxylic acids,NIST DIMSpec
+8:2 FTCA,C10H3F17O2,477.98964,,Fluorotelomer carboxylic acids,NIST DIMSpec
+6:2 FTUCA,C8HF13O2,375.98023,,Fluorotelomer unsaturated carboxylic acids,NIST DIMSpec
+8:2 FTUCA,C10HF17O2,475.97399,,Fluorotelomer unsaturated carboxylic acids,NIST DIMSpec
+6:2 FTS,C8H5F13O3S,427.97409,,Fluorotelomer sulfonic acids,NIST DIMSpec
+8:2 FTS,C10H5F17O3S,527.96785,,Fluorotelomer sulfonic acids,NIST DIMSpec
+4:2 FTS,C6H5F9O3S,327.98033,,Fluorotelomer sulfonic acids,NIST DIMSpec
+HFPO-DA (GenX),C6HF11O3,329.97401,,Perfluoroether carboxylic acids,NIST DIMSpec
+ADONA,C7H2F12O4,377.97310,,Perfluoroether carboxylic acids,NIST DIMSpec
+F-53B Major,C8HF16ClO4S,530.89813,,Chlorinated polyfluoroether sulfonates,NIST DIMSpec
+F-53B Minor,C6HF12ClO4S,430.90437,,Chlorinated polyfluoroether sulfonates,NIST DIMSpec
+PFMBA,C4HF6O2,194.98821,,Perfluoroalkyl acids (branched),NIST DIMSpec
+PFMPA,C5HF8O2,244.98509,,Perfluoroalkyl acids (branched),NIST DIMSpec
+PFHxSA,C6H2F13NO2S,398.95986,,Perfluoroalkane sulfonamides,NIST DIMSpec
+PFBSA,C4H2F9NO2S,298.96610,,Perfluoroalkane sulfonamides,NIST DIMSpec
+PFPrS,C3HF7O3S,249.95370,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFNS,C9HF19O3S,549.93434,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+3:3 FTCA,C6H3F7O2,228.00183,,Fluorotelomer carboxylic acids,NIST DIMSpec
+5:3 FTCA,C8H3F11O2,327.99559,,Fluorotelomer carboxylic acids,NIST DIMSpec
+7:3 FTCA,C10H3F15O2,427.98935,,Fluorotelomer carboxylic acids,NIST DIMSpec
+PFECHS,C8HF15O3S,461.93470,,Cyclic perfluoroalkyl sulfonic acids,NIST DIMSpec
+PFMOAA,C3HF5O3,177.98539,,Perfluoroether carboxylic acids,NIST DIMSpec
+PFO2HxA,C6HF11O4,345.96396,,Perfluoroether carboxylic acids,NIST DIMSpec
+PFO3OA,C8HF15O5,445.95460,,Perfluoroether carboxylic acids,NIST DIMSpec
+PFO4DA,C10HF19O6,545.94524,,Perfluoroether carboxylic acids,NIST DIMSpec
+PFO5DoDA,C12HF23O7,645.93588,,Perfluoroether carboxylic acids,NIST DIMSpec
+NVHOS,C6H3F10NO5S,402.95556,,N-oxide polyfluoroalkyl sulfonates,NIST DIMSpec
+Nafion BP1,C7HF13O5S,427.92930,,Perfluoroether sulfonic acids,NIST DIMSpec
+Nafion BP2,C9HF17O6S,527.91994,,Perfluoroether sulfonic acids,NIST DIMSpec
+Nafion BP4,C13HF25O8S,727.90122,,Perfluoroether sulfonic acids,NIST DIMSpec
+PMPA,C4HF8O3,246.97512,,Perfluoroether carboxylic acids,NIST DIMSpec
+PEPA,C5HF10O3,296.97200,,Perfluoroether carboxylic acids,NIST DIMSpec
+PFPrOPrA,C6HF12O3,346.96888,,Perfluoroether carboxylic acids,NIST DIMSpec
+FBSA,C4H2F9NO2S,298.96610,,Perfluorobutane sulfonamide,NIST DIMSpec
+MeFBSA,C5H4F9NO2S,312.98175,,N-methyl perfluorobutane sulfonamide,NIST DIMSpec
+MeFBSAA,C7H6F9NO4S,370.98723,,N-methyl perfluorobutane sulfonamidoacetic acid,NIST DIMSpec
+EtFBSA,C6H6F9NO2S,326.99740,,N-ethyl perfluorobutane sulfonamide,NIST DIMSpec
+EtFBSAA,C8H8F9NO4S,384.00288,,N-ethyl perfluorobutane sulfonamidoacetic acid,NIST DIMSpec
+AmPr-FHxSA,C9H9F13N2O2S,481.01632,,Amino-propyl perfluorohexane sulfonamide,NIST DIMSpec
+4:1:2 FTS Linear,C7H5F9O3S,337.97721,,Fluorotelomer sulfonic acids,NIST DIMSpec
+PFPeS Linear,C5HF11O3S,349.94746,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFHpS Linear,C7HF15O3S,449.94058,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFNS Linear,C9HF19O3S,549.93434,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFDS Linear,C10HF21O3S,599.93122,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFDoDS,C12HF25O3S,699.92498,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFTrDS,C13HF27O3S,749.92186,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFTeDS,C14HF29O3S,799.91874,,Perfluoroalkyl sulfonic acids (PFSAs),NIST DIMSpec
+PFHxDA,C16HF31O2,813.94544,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+PFOcDA,C18HF35O2,913.93920,,Perfluoroalkyl carboxylic acids (PFCAs),NIST DIMSpec
+EtFOSE,C12H10F17NO3S,571.00682,,Fluorotelomer sulfonamide ethanols,NIST DIMSpec
+MeFOSE,C11H8F17NO3S,557.99117,,Fluorotelomer sulfonamide ethanols,NIST DIMSpec
+diPAPs 4:2,C14H11F9O4P,461.02319,,Polyfluoroalkyl phosphates,NIST DIMSpec
+diPAPs 6:2,C18H11F13O4P,561.01695,,Polyfluoroalkyl phosphates,NIST DIMSpec
+diPAPs 8:2,C22H11F17O4P,661.01071,,Polyfluoroalkyl phosphates,NIST DIMSpec
+monoPAPs 4:2,C8H8F9O4P,365.99888,,Polyfluoroalkyl phosphates,NIST DIMSpec
+monoPAPs 6:2,C10H8F13O4P,465.99264,,Polyfluoroalkyl phosphates,NIST DIMSpec
+monoPAPs 8:2,C12H8F17O4P,565.98640,,Polyfluoroalkyl phosphates,NIST DIMSpec
