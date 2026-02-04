@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Callable
 
 from PySide6.QtCore import Qt, Signal, QThread, QObject
+from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -109,6 +110,12 @@ class FeatureTab(QWidget):
         self._mzml_meta: MzMLMeta | None = None
 
         self._setup_ui()
+
+    def _set_placeholder_color(self, widget: QLineEdit):
+        """Set placeholder text color for visibility."""
+        palette = widget.palette()
+        palette.setColor(QPalette.PlaceholderText, QColor("#718096"))
+        widget.setPalette(palette)
 
     def _setup_ui(self):
         """Setup the UI."""
@@ -250,6 +257,7 @@ class FeatureTab(QWidget):
 
         self.mzml_input = QLineEdit()
         self.mzml_input.setPlaceholderText("Select mzML file...")
+        self._set_placeholder_color(self.mzml_input)
         self.mzml_input.textChanged.connect(self._on_mzml_changed)
         mzml_layout.addWidget(self.mzml_input)
 
@@ -348,6 +356,7 @@ class FeatureTab(QWidget):
         blank_layout = QHBoxLayout()
         self.blank_input = QLineEdit()
         self.blank_input.setPlaceholderText("Blank mzML files (optional)")
+        self._set_placeholder_color(self.blank_input)
         self.blank_input.setEnabled(False)
         blank_layout.addWidget(self.blank_input)
 

@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from PySide6.QtCore import Qt, Signal, QThread, QObject
+from PySide6.QtGui import QPalette, QColor
 from PySide6.QtWidgets import (
     QWidget,
     QVBoxLayout,
@@ -103,6 +104,12 @@ class PrioritizeTab(QWidget):
         self._thread = None
 
         self._setup_ui()
+
+    def _set_placeholder_color(self, widget: QLineEdit):
+        """Set placeholder text color for visibility."""
+        palette = widget.palette()
+        palette.setColor(QPalette.PlaceholderText, QColor("#718096"))
+        widget.setPalette(palette)
 
     def _setup_ui(self):
         """Setup the UI."""
@@ -303,6 +310,7 @@ class PrioritizeTab(QWidget):
 
         self.suspect_input = QLineEdit()
         self.suspect_input.setPlaceholderText("Optional CSV/TSV file...")
+        self._set_placeholder_color(self.suspect_input)
         suspect_layout.addWidget(self.suspect_input)
 
         suspect_btn = QPushButton("Browse")
@@ -339,6 +347,8 @@ class PrioritizeTab(QWidget):
         """Create configuration group."""
         group = QGroupBox("Configuration")
         layout = QFormLayout(group)
+        layout.setVerticalSpacing(12)
+        layout.setHorizontalSpacing(15)
 
         # Enable checkboxes
         self.mdc_enable = QCheckBox("MD/C Filtering")
@@ -404,6 +414,7 @@ class PrioritizeTab(QWidget):
 
         self.calibration_input = QLineEdit()
         self.calibration_input.setPlaceholderText("Calibration CSV (정량 모드용)...")
+        self._set_placeholder_color(self.calibration_input)
         self.calibration_input.setEnabled(False)
         layout.addRow("Calibration:", self.calibration_input)
 
